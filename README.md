@@ -1,4 +1,3 @@
-# IITB_EE769_Assignments
 ---
 title: EE769 A2 Demo App
 emoji: 👀
@@ -9,3 +8,5 @@ sdk_version: 1.32.2
 app_file: app.py
 pinned: false
 ---
+
+# IITB_EE769_Assignments
