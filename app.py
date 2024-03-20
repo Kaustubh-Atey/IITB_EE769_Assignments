@@ -17,12 +17,19 @@ with col_02:
   st.subheader('Select Classifier Model:', divider='rainbow')
   model_options = st.radio("", ("Random Forest", "Support Vector Machine", "Neural Network"))
 
+# Data Paths
 wine_data_path = {'Red Wine': 'Data/red_wine_processed_data.csv',
                   'White Wine': 'Data/white_wine_processed_data.csv'}[data_options]
 
-model_path = {'Random Forest': 'Models/RF_Model.joblib',
-                  'Support Vector Machine': 'Models/RF_Model.joblib',
-                  ' Network': 'Models/RF_Model.joblib'}[model_options]
+# Model Paths
+if data_options == 'Red Wine':
+   model_path = {'Random Forest': 'Models/red_RF_model.joblib',
+                  'Support Vector Machine': 'Models/red_SVM_model.joblib',
+                  ' Network': 'Models/red_NN_model.joblib'}[model_options]
+else:
+   model_path = {'Random Forest': 'Models/white_RF_model.joblib',
+                  'Support Vector Machine': 'Models/white_SVM_model.joblib',
+                  ' Network': 'Models/white_NN_model.joblib'}[model_options]
 
 st.write('Selected = ', wine_data_path, model_path)
 
@@ -57,7 +64,6 @@ test_input = np.array([alcohol_f, total_sulfur_dioxide_f, volatile_acidity_f, fi
 
 # Scaling Information
 wine_df = pd.read_csv(wine_data_path)
-wine_df = wine_df.drop(wine_df.columns[0], axis=1)    # Remove Soon
 scalar = MinMaxScaler()
 scalar.fit(wine_df)
 test_input = scalar.transform(test_input)
@@ -72,4 +78,4 @@ if st.button('Calculate'):
   out_class = clf.predict(test_input)
 
   st.subheader('Predicted Wine Quality (Model)')
-  st.write('Wine Quality', out_class)
+  st.write('Wine Quality', out_class+3)
