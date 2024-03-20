@@ -66,8 +66,10 @@ test_input = np.array([alcohol_f, total_sulfur_dioxide_f, volatile_acidity_f, fi
 wine_df = pd.read_csv(wine_data_path)
 scalar = MinMaxScaler()
 scalar.fit(wine_df)
+
+# Print the Input
+st.write('User Input: ', test_input)
 test_input = scalar.transform(test_input)
-st.write('input: ', test_input)
 
 # Load model
 clf = load(model_path)
@@ -77,5 +79,5 @@ if st.button('Calculate'):
   # Prediction
   out_class = clf.predict(test_input)
 
-  st.subheader('Predicted Wine Quality (Model)')
-  st.write('Wine Quality', out_class+3)
+  st.subheader('Predicted Wine Quality:',  divider='rainbow')
+  st.write(f'Prediction using {model_options} classifier', out_class+3)
