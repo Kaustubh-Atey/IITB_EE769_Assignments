@@ -4,7 +4,7 @@ import streamlit as st
 from joblib import dump, load
 from sklearn.preprocessing import MinMaxScaler
 
-st.title('Wine Quality Predictor')
+st.title('🍷 Wine Quality Predictor 🔎📊')
 
 # Create a grid layout for sliders
 col_01, col_02 = st.columns(2)
@@ -29,7 +29,7 @@ if data_options == 'Red Wine':
 else:
    model_path = {'Random Forest': 'Models/white_RF_model.joblib',
                   'Support Vector Machine': 'Models/white_SVM_model.joblib',
-                  ' Network': 'Models/white_NN_model.joblib'}[model_options]
+                  'Neural Network': 'Models/white_NN_model.joblib'}[model_options]
 
 st.write('Selected = ', wine_data_path, model_path)
 
