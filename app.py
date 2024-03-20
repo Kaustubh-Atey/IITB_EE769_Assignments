@@ -17,12 +17,12 @@ with col_02:
   st.subheader('Select Classifier Model:', divider='rainbow')
   model_options = st.radio("", ("Random Forest", "Support Vector Machine", "Neural Network"))
 
-wine_data_path = {'Red Wine': '/content/red_wine_processed_data.csv',
-                  'White Wine': '/content/white_wine_processed_data.csv'}[data_options]
+wine_data_path = {'Red Wine': 'Data/red_wine_processed_data.csv',
+                  'White Wine': 'Data/white_wine_processed_data.csv'}[data_options]
 
-model_path = {'Random Forest': '/content/RF_Model.joblib',
-                  'Support Vector Machine': 'SVM',
-                  ' Network': 'NN'}[model_options]
+model_path = {'Random Forest': 'Models/RF_Model.joblib',
+                  'Support Vector Machine': 'Models/RF_Model.joblib',
+                  ' Network': 'Models/RF_Model.joblib'}[model_options]
 
 st.write('Selected = ', wine_data_path, model_path)
 
