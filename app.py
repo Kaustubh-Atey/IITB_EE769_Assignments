@@ -25,7 +25,7 @@ wine_data_path = {'Red Wine': 'Data/red_wine_processed_data.csv',
 if data_options == 'Red Wine':
    model_path = {'Random Forest': 'Models/red_RF_model.joblib',
                   'Support Vector Machine': 'Models/red_SVM_model.joblib',
-                  ' Network': 'Models/red_NN_model.joblib'}[model_options]
+                  'Neural Network': 'Models/red_NN_model.joblib'}[model_options]
 else:
    model_path = {'Random Forest': 'Models/white_RF_model.joblib',
                   'Support Vector Machine': 'Models/white_SVM_model.joblib',
@@ -33,7 +33,7 @@ else:
 
 st.write('Selected = ', wine_data_path, model_path)
 
-st.subheader('Slide the bars to slect value of features:')
+st.subheader('Slide the bars to slect value of features:', divider='rainbow'))
 
 # Create a grid layout for sliders
 col_11, col_12, col_13 = st.columns(3)
