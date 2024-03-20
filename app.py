@@ -75,10 +75,13 @@ test_input = scalar.transform(test_input)
 # Load model
 clf = load(model_path)
 
-if st.button('Calculate'):
+st.subheader('Predicted Wine Quality:',  divider='rainbow')
 
-  # Prediction
-  out_class = clf.predict(test_input)
+col_21, col_22 = st.columns(2)
+with col_21:
+  out_class = 0   # Before calculating
+  if st.button('Calculate'):
+     out_class = clf.predict(test_input)
 
-  st.subheader('Predicted Wine Quality:',  divider='rainbow')
+with col_22:
   st.write(f'Prediction using {model_options} classifier', out_class+3)
