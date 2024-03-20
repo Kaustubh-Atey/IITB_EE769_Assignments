@@ -33,7 +33,7 @@ else:
 
 st.write('Selected = ', wine_data_path, model_path)
 
-st.subheader('Slide the bars to slect value of features:', divider='rainbow'))
+st.subheader('Slide the bars to slect value of features:', divider='rainbow')
 
 # Create a grid layout for sliders
 col_11, col_12, col_13 = st.columns(3)
