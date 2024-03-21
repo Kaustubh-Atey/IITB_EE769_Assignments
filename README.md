@@ -10,4 +10,7 @@ pinned: false
 ---
 
 # IITB_EE769_Assignments
+The app is hosted on Hugging Face Spaces at: https://huggingface.co/spaces/kaustubh/EE769_A2_Demo_App
+
+
 
