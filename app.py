@@ -45,7 +45,7 @@ wine_df = pd.read_csv(wine_data_path)
 scalar = MinMaxScaler()
 scalar.fit(wine_df)
 
-st.subheader('Slide the bars to slect value of features:', divider='rainbow')
+st.subheader('Slide the bars to select value of features:', divider='rainbow')
 
 # Create a grid layout for sliders
 col_11, col_12, col_13 = st.columns(3)
