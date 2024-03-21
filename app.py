@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
+import joblib
 from joblib import dump, load
 from sklearn.preprocessing import MinMaxScaler
 
@@ -32,7 +33,7 @@ else:
                   'Neural Network': 'Models/white_NN_model.joblib'}[model_options]
 
 # REMOVE THIS LINE 
-st.write('Selected = ', wine_data_path, model_path)
+st.write('Selected = ', wine_data_path, model_path, joblib.__version__)
 
 st.subheader('Slide the bars to slect value of features:', divider='rainbow')
 
