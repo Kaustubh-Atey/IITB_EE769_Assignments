@@ -12,11 +12,11 @@ col_01, col_02 = st.columns(2)
 
 with col_01:
   st.subheader('Select Wine Type:', divider='rainbow')
-  data_options = st.radio("", ("Red Wine", "White Wine"))
+  data_options = st.radio("Data Type", ("Red Wine", "White Wine"), label_visibility  = 'collapsed')
 
 with col_02:
   st.subheader('Select Classifier Model:', divider='rainbow')
-  model_options = st.radio("", ("Random Forest", "Support Vector Machine", "Neural Network"))
+  model_options = st.radio("Model Type", ("Random Forest", "Support Vector Machine", "Neural Network"), label_visibility  = 'collapsed')
 
 # Data Paths
 wine_data_path = {'Red Wine': 'Data/red_wine_processed_data.csv',
@@ -32,8 +32,10 @@ else:
                   'Support Vector Machine': 'Models/white_SVM_model.joblib',
                   'Neural Network': 'Models/white_NN_model.joblib'}[model_options]
 
-# REMOVE THIS LINE 
-st.write('Selected = ', wine_data_path, model_path, joblib.__version__)
+# Scaling Information
+wine_df = pd.read_csv(wine_data_path)
+scalar = MinMaxScaler()
+scalar.fit(wine_df)
 
 st.subheader('Slide the bars to slect value of features:', divider='rainbow')
 
@@ -61,28 +63,25 @@ with col_13:
     chlorides_f = st.slider('Free Chlorides', min_value=0.0, max_value=1.0, value=0.2)
 
 # User input to test
-test_input = np.array([alcohol_f, total_sulfur_dioxide_f, volatile_acidity_f, fixed_acidity_f, residual_sugar_f,
-              chlorides_f, free_sulfur_dioxide_f, pH_f, sulphates_f, citric_acid_f, density_f]).reshape(1, 11)
+test_input_dict = {'alcohol': [alcohol_f], 'total sulfur dioxide': [total_sulfur_dioxide_f], 'volatile acidity': [volatile_acidity_f],
+                   'fixed acidity': [fixed_acidity_f], 'residual sugar': [residual_sugar_f], 'chlorides': [chlorides_f],
+                   'free sulfur dioxide': [free_sulfur_dioxide_f], 'pH': [pH_f], 'sulphates': [sulphates_f],
+                   'citric acid': [citric_acid_f], 'density': [density_f]}
 
-# Scaling Information
-wine_df = pd.read_csv(wine_data_path)
-scalar = MinMaxScaler()
-scalar.fit(wine_df)
-
-# REMOVE SOON
-#st.write('User Input: ', test_input)
+test_input = pd.DataFrame.from_dict(test_input_dict, orient='columns')              
 test_input = scalar.transform(test_input)
 
 # Load model
-clf = load(model_path)
+wine_classifier = load(model_path)
 
 st.subheader('Predicted Wine Quality:',  divider='rainbow')
 
 col_21, col_22 = st.columns(2)
-with col_21:
-  out_class = 0   # Before calculating
-  if st.button('Calculate'):
-     out_class = clf.predict(test_input)
-
 with col_22:
-  st.write(f'Prediction using {model_options} classifier', out_class+3)
+  out_class = [0]               # Before calculating
+  if st.button('Calculate'):
+     out_class = wine_classifier.predict(test_input)
+
+with col_21:
+  txt = st.text_area(
+    f'Prediction using {model_options} Classifier:', 'Wine Quality = ' + str(int(out_class[0]) + 3))
